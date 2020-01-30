@@ -45,10 +45,12 @@ class Countdown{
     
     private func initTimer() {
         let action: (Timer)->Void = { [weak self] timer in
-            guard let strongSelf = self else {
+            guard let strongSelf = self else {return}
+            strongSelf.timeElapsed -= strongSelf.step
+            if strongSelf.timeElapsed <= 0 {
+                strongSelf.deinitTimer()
                 return
             }
-            strongSelf.timeElapsed -= strongSelf.timeElapsed - strongSelf.step
             strongSelf.timeUpdated(round(strongSelf.timeElapsed))
         }
         timer = Timer.scheduledTimer(withTimeInterval: step,

@@ -11,6 +11,7 @@ import UIKit
 
 class QuizChallengeViewModel{
     var showLoadingHud: Bindable = Bindable(false)
+    var enableStart: Bindable = Bindable(false)
     var onCountAnswer: Bindable = Bindable("00/50")
     var updateTimer: Bindable = Bindable("05:00")
     var onChallengeLoad: Bindable<String?> = Bindable(nil)
@@ -25,10 +26,6 @@ class QuizChallengeViewModel{
     
     private lazy var countdown = Countdown(timeElapsed: 300.0, timeUpdated: { [weak self] timeInterval in
         guard let strongSelf = self else { return }
-        if timeInterval == 0 {
-            strongSelf.gameOver()
-            return
-        }
         strongSelf.updateTimer.value = strongSelf.timeString(from: timeInterval)
     })
     
@@ -70,6 +67,7 @@ class QuizChallengeViewModel{
         API.get(Challenge.self, endpoint: .challenge(1), success: { [weak self] (result) in
             if !result.answer.isEmpty{
                 self!.answer = result.answer
+                self!.enableStart.value = true
                 self!.onChallengeLoad.value = result.question
             }
         }) { [weak self]  (error) in
@@ -86,11 +84,15 @@ class QuizChallengeViewModel{
         countdown.toggle()
     }
     
+    func stopChallenge(){
+        countdown.stop()
+    }
+    
     func verifyAnswer(_ answer: String){
         if self.answer.contains(answer){
             if !playerAnswer.contains(answer){
                 playerAnswer.append(answer)
-                if playerAnswer.count == answer.count {
+                if playerAnswer.count == 50 {
                     self.gameWin()
                 }
             }
