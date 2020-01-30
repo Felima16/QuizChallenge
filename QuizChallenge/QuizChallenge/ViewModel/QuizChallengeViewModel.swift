@@ -11,7 +11,7 @@ import UIKit
 
 class QuizChallengeViewModel{
     var showLoadingHud: Bindable = Bindable(false)
-    var onCountAnswer: Bindable = Bindable("")
+    var onCountAnswer: Bindable = Bindable("00/50")
     var updateTimer: Bindable = Bindable("05:00")
     var onChallengeLoad: Bindable<String?> = Bindable(nil)
     var onShowAlert: Bindable<UIAlertController?> = Bindable(nil)
@@ -25,7 +25,8 @@ class QuizChallengeViewModel{
     private lazy var countdown = Countdown(timeElapsed: 300.0, timeUpdated: { [weak self] timeInterval in
         guard let strongSelf = self else { return }
         if timeInterval == 0 {
-            
+            strongSelf.gameOver()
+            return
         }
         strongSelf.updateTimer.value = strongSelf.timeString(from: timeInterval)
     })
@@ -59,11 +60,32 @@ class QuizChallengeViewModel{
     
     func verifyAnswer(_ answer: String){
         if self.answer.contains(answer){
-            playerAnswer.append(answer)
+            if !playerAnswer.contains(answer){
+                playerAnswer.append(answer)
+                if playerAnswer.count == answer.count {
+                    self.gameWin()
+                }
+            }
         }
     }
     
     private func gameOver(){
-        
+        self.countdown.stop()
+        let okAlert = SingleButtonAlert(
+            title: "Time finished",
+            message: "Sorry, time is up! you got \(playerAnswer.count) out of 50 answers",
+            action: AlertAction(buttonTitle: "TRY AGAIN", handler: { print("Ok pressed!") })
+        )
+        self.onShowAlert.value = okAlert.createAlert()
+    }
+    
+    private func gameWin(){
+        self.countdown.stop()
+        let okAlert = SingleButtonAlert(
+            title: "Congratulations",
+            message: "Good job! you found all the answers on time. Keep up with the great work!",
+            action: AlertAction(buttonTitle: "PLAY AGAIN", handler: { print("Ok pressed!") })
+        )
+        self.onShowAlert.value = okAlert.createAlert()
     }
 }
