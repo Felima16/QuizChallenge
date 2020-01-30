@@ -22,6 +22,10 @@
 		6DD5F9A423E295930067F399 /* Countdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5F9A323E295930067F399 /* Countdown.swift */; };
 		6DD5F9A723E297970067F399 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5F9A623E297970067F399 /* UIView.swift */; };
 		6DD5F9A923E2A5B00067F399 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5F9A823E2A5B00067F399 /* Alert.swift */; };
+		6DD5F9AB23E310950067F399 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD5F9AA23E310950067F399 /* Notification.swift */; };
+		6DD5F9B123E3188D0067F399 /* SF-Pro-Display-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD5F9AE23E3188D0067F399 /* SF-Pro-Display-Regular.otf */; };
+		6DD5F9B223E3188D0067F399 /* SF-Pro-Display-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD5F9AF23E3188D0067F399 /* SF-Pro-Display-Bold.otf */; };
+		6DD5F9B323E3188D0067F399 /* SF-Pro-Display-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6DD5F9B023E3188D0067F399 /* SF-Pro-Display-Semibold.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,10 @@
 		6DD5F9A323E295930067F399 /* Countdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Countdown.swift; sourceTree = "<group>"; };
 		6DD5F9A623E297970067F399 /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		6DD5F9A823E2A5B00067F399 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		6DD5F9AA23E310950067F399 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		6DD5F9AE23E3188D0067F399 /* SF-Pro-Display-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Regular.otf"; sourceTree = "<group>"; };
+		6DD5F9AF23E3188D0067F399 /* SF-Pro-Display-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Bold.otf"; sourceTree = "<group>"; };
+		6DD5F9B023E3188D0067F399 /* SF-Pro-Display-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Semibold.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,7 @@
 		6DD5F96423E28CF40067F399 /* QuizChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				6DD5F9AC23E318650067F399 /* Resources */,
 				6DD5F9A023E28FC40067F399 /* Util */,
 				6DD5F99C23E28E400067F399 /* DataControl */,
 				6DD5F99923E28DAE0067F399 /* Model */,
@@ -201,8 +210,27 @@
 			isa = PBXGroup;
 			children = (
 				6DD5F9A623E297970067F399 /* UIView.swift */,
+				6DD5F9AA23E310950067F399 /* Notification.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6DD5F9AC23E318650067F399 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6DD5F9AD23E3186D0067F399 /* Fonte */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6DD5F9AD23E3186D0067F399 /* Fonte */ = {
+			isa = PBXGroup;
+			children = (
+				6DD5F9AF23E3188D0067F399 /* SF-Pro-Display-Bold.otf */,
+				6DD5F9AE23E3188D0067F399 /* SF-Pro-Display-Regular.otf */,
+				6DD5F9B023E3188D0067F399 /* SF-Pro-Display-Semibold.otf */,
+			);
+			path = Fonte;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -309,8 +337,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DD5F9B323E3188D0067F399 /* SF-Pro-Display-Semibold.otf in Resources */,
 				6DD5F97223E28CFA0067F399 /* LaunchScreen.storyboard in Resources */,
+				6DD5F9B223E3188D0067F399 /* SF-Pro-Display-Bold.otf in Resources */,
 				6DD5F96F23E28CFA0067F399 /* Assets.xcassets in Resources */,
+				6DD5F9B123E3188D0067F399 /* SF-Pro-Display-Regular.otf in Resources */,
 				6DD5F96D23E28CF50067F399 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +375,7 @@
 				6DD5F99823E28DA90067F399 /* QuizChallengeViewModel.swift in Sources */,
 				6DD5F99F23E28E8D0067F399 /* API.swift in Sources */,
 				6DD5F9A723E297970067F399 /* UIView.swift in Sources */,
+				6DD5F9AB23E310950067F399 /* Notification.swift in Sources */,
 				6DD5F9A923E2A5B00067F399 /* Alert.swift in Sources */,
 				6DD5F99B23E28DC30067F399 /* Challenge.swift in Sources */,
 			);

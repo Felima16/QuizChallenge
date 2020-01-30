@@ -15,6 +15,7 @@ class QuizChallengeViewModel{
     var updateTimer: Bindable = Bindable("05:00")
     var onChallengeLoad: Bindable<String?> = Bindable(nil)
     var onShowAlert: Bindable<UIAlertController?> = Bindable(nil)
+    var onUpdateConstraint: Bindable<CGFloat> = Bindable(0)
     var answer: [String] = []
     var playerAnswer: [String] = []{
         didSet{
@@ -31,10 +32,37 @@ class QuizChallengeViewModel{
         strongSelf.updateTimer.value = strongSelf.timeString(from: timeInterval)
     })
     
+    init() {
+        self.registerForKeyboardNotifications()
+    }
+    deinit {
+        unregisterForKeyboardNotifications()
+    }
+    
     private func timeString(from timeInterval: TimeInterval) -> String {
         let seconds = Int(timeInterval.truncatingRemainder(dividingBy: 60))
         let minutes = Int(timeInterval.truncatingRemainder(dividingBy: 60 * 60) / 60)
         return String(format: "%.2d:%.2d", minutes, seconds)
+    }
+    
+    fileprivate func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    fileprivate func unregisterForKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(notification: Notification) {
+        let keyboardSize = notification.keyboardSize
+        let keyboardHeight = keyboardSize?.height ?? 250
+        onUpdateConstraint.value = keyboardHeight + 40
+    }
+
+    @objc func keyboardWillHide(notification: Notification){
+        onUpdateConstraint.value = 0
     }
     
     func getChallenge(){
